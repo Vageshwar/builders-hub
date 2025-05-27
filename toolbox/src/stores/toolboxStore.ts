@@ -19,36 +19,60 @@ const toolboxInitialState = {
     erc20TokenRemoteAddress: "",
     nativeTokenHomeAddress: "",
     nativeTokenRemoteAddress: "",
-}
+    registrationVerifierAddress: "",
+    mintVerifierAddress: "",
+    withdrawVerifierAddress: "",
+    transferVerifierAddress: "",
+    babyJubJubAddress: "",
+    registrarAddress: "",
+    encryptedERCAddress: "",
+    encryptedERCDecimal: 18,
+    encryptedERCTokenName: "",
+    encryptedERCSymbol: "",
+    encryptedERCIsConverter: false,
+};
 
 
-export const getToolboxStore = (chainId: string) => create(
+export const getToolboxStore = (chainId: string) =>
+  create(
     persist(
-        combine(toolboxInitialState, (set) => ({
-            setValidatorMessagesLibAddress: (validatorMessagesLibAddress: string) => set({ validatorMessagesLibAddress }),
-            setValidatorManagerAddress: (validatorManagerAddress: string) => set({ validatorManagerAddress }),
-            setRewardCalculatorAddress: (rewardCalculatorAddress: string) => set({ rewardCalculatorAddress }),
-            setStakingManagerAddress: (stakingManagerAddress: string) => set({ stakingManagerAddress }),
-            setTeleporterRegistryAddress: (address: string) => set({ teleporterRegistryAddress: address }),
-            setIcmReceiverAddress: (address: string) => set({ icmReceiverAddress: address }),
-            setExampleErc20Address: (address: string) => set({ exampleErc20Address: address }),
-            setErc20TokenHomeAddress: (address: string) => set({ erc20TokenHomeAddress: address }),
-            setNativeTokenHomeAddress: (address: string) => set({ nativeTokenHomeAddress: address }),
-            setErc20TokenRemoteAddress: (address: string) => set({ erc20TokenRemoteAddress: address }),
-            setNativeTokenRemoteAddress: (address: string) => set({ nativeTokenRemoteAddress: address }),
+      combine(toolboxInitialState, (set) => ({
+        setValidatorMessagesLibAddress: (validatorMessagesLibAddress: string) => set({ validatorMessagesLibAddress }),
+        setValidatorManagerAddress: (validatorManagerAddress: string) => set({ validatorManagerAddress }),
+        setRewardCalculatorAddress: (rewardCalculatorAddress: string) => set({ rewardCalculatorAddress }),
+        setStakingManagerAddress: (stakingManagerAddress: string) => set({ stakingManagerAddress }),
+        setTeleporterRegistryAddress: (address: string) => set({ teleporterRegistryAddress: address }),
+        setIcmReceiverAddress: (address: string) => set({ icmReceiverAddress: address }),
+        setExampleErc20Address: (address: string) => set({ exampleErc20Address: address }),
+        setErc20TokenHomeAddress: (address: string) => set({ erc20TokenHomeAddress: address }),
+        setNativeTokenHomeAddress: (address: string) => set({ nativeTokenHomeAddress: address }),
+        setErc20TokenRemoteAddress: (address: string) => set({ erc20TokenRemoteAddress: address }),
+        setNativeTokenRemoteAddress: (address: string) => set({ nativeTokenRemoteAddress: address }),
+        setRegistrationVerifierAddress: (address: string) => set({ registrationVerifierAddress: address }),
+        setRegistrarAddress: (address: string) => set({ registrarAddress: address }),
+        setMintVerifierAddress: (address: string) => set({ mintVerifierAddress: address }),
+        setWithdrawVerifierAddress: (address: string) => set({ withdrawVerifierAddress: address }),
+        setTransfterVerifierAddress: (address: string) => set({ transferVerifierAddress: address }),
+        setBabyJubJubAddress: (address: string) => set({ babyJubJubAddress: address }),
+        setEncryptedERCAddress: (address: string) => set({ encryptedERCAddress: address }),
+        setEncryptedERCDecimal: (decimal: number) => set({ encryptedERCDecimal: decimal }),
+        setEncryptedERCTokenName: (tokenName: string) => set({ encryptedERCTokenName: tokenName }),
+        setEncryptedERCSymbol: (symbol: string) => set({ encryptedERCSymbol: symbol }),
+        setEncryptedERCIsConverter: (isConverter: boolean) => set({ encryptedERCIsConverter: isConverter }),
 
-            reset: () => {
-                if (typeof window !== 'undefined') {
-                    window.localStorage.removeItem(`${STORE_VERSION}-toolbox-storage-${chainId}`);
-                }
-            },
-        })),
-        {
-            name: `${STORE_VERSION}-toolbox-storage-${chainId}`,
-            storage: createJSONStorage(localStorageComp),
+        reset: () => {
+          if (typeof window !== 'undefined') {
+            window.localStorage.removeItem(`${STORE_VERSION}-toolbox-storage-${chainId}`);
+          }
         },
+      })),
+      {
+        name: `${STORE_VERSION}-toolbox-storage-${chainId}`,
+        storage: createJSONStorage(localStorageComp),
+      },
     ),
-)
+  );
+
 
 export const useToolboxStore = () => {
     const selectedL1 = useSelectedL1()();
