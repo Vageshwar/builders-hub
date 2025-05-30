@@ -393,6 +393,18 @@ const componentGroups: Record<string, ComponentGroupType> = {
       }
     ]
   },
+  'EncrpytedERC20 Setup': {
+    components: [
+      {
+        id: 'encrpytedERC20SetUp',
+        label: "Deploy Your own Encrpyted ERC20",
+        component: lazy(() => import('./EncryptedERC20/EcryptedERC20')),
+        fileNames: [],
+        walletMode: "l1"
+      }
+    ],
+
+  }
 };
 
 // Loading component for Suspense
